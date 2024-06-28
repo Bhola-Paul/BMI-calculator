@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        .total{
+            height: 500px;
+            width: 500px;
+            /* border: 2px solid black; */
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 75px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: aqua;
+        }
+        .form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #sub{
+            background-color: yellow;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        #sub:hover{
+            background-color: chartreuse;
+            box-shadow: 2px 2px;
+        }
+        input{
+            border: 2px solid black;
+            border-radius: 5px;
+            text-align: center;
+        }
+        input:hover{
+            background-color: skyblue;
+            box-shadow: 2px 2px blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="total">
+        <h1>BMI Calculator</h1>
+        <form class="form">
+            <p><label>Enter height in meters: </label><input type="text" id="height"></p>
+            <p><label>Enter weight in Kilograms: </label><input type="text" id="weight"></p>
+            <button id="sub">Calculate</button>
+            <div id="ans"></div>
+            <p id="conclusion"></p>
+        </form>
+    </div>
+</body>
+<script>
+    const form=document.querySelector('form')
+    form.addEventListener('submit',function(e){
+        e.preventDefault()
+        const h=parseFloat(document.querySelector('#height').value);
+        const w=parseFloat(document.querySelector('#weight').value);
+        const res=document.querySelector('#ans');
+        const con=document.querySelector('#conclusion');
+        // console.log(h);
+        // console.log(w);
+        // console.log(res);
+        // console.log(con);
+        if(h<1 || isNaN(h)){
+            res.innerHTML='<h2>Enter a valid height!</h2>';
+             con.innerHTML=``
+        }
+        else if(w<1 || isNaN(w)){
+            res.innerHTML='<h2>Enter a valid weight!</h2>';
+             con.innerHTML=``
+        }
+        else{
+            const bmi=(w/(h*h)).toFixed(4)
+            res.innerHTML=`<h2>Your BMI is: ${bmi}</h2>`
+            if(bmi<18.6){
+                con.innerHTML=`<h3>You are underweight</h3>`
+                con.style.color=`red`;
+            }
+            else if(bmi>24.9){
+                con.innerHTML=`<h3>You are overweight</h3>`
+                con.style.color=`red`;
+            }
+            else{
+                con.innerHTML=`<h3>You are fit</h3>`
+                con.style.color=`green`;
+            }
+        }
+    })
+</script>
+</html>
